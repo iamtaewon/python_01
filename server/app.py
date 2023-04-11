@@ -30,5 +30,19 @@ def login():
     else:
         return redirect('/')
 
+@app.route('/corona')
+def corona():
+    # get형태에서 데이터를 받아서 변수에 대입
+    servicekey = request.args['servicekey']
+    print(servicekey)
+    if servicekey == 'aaa':
+        df = pd.read_csv('../csv/corona.csv')
+        df = df.dronpna(axis=0)
+        dict_data = df.to_dict('records')
+        return dict_data
+    else:
+        return 'servicekey error'
+    
+
 
 app.run(port=3000)
