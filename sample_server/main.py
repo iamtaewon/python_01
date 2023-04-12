@@ -5,7 +5,7 @@ import pandas as pd
 ## Class 생성
 app = Flask(__name__)
 
-## localhost:5000/ 요청시 index.html 리턴 api 생성
+## localhost:3000/ 요청시 index.html 리턴 api 생성
 @app.route("/")
 def index():
     # inex.html 그래프를 그리기 위해서 필요한 변수 값 
@@ -48,8 +48,11 @@ def index2():
     df["일일확진자"] = df["확진자"].diff().fillna(0)
     df["일일사망자"] = df["사망자"].diff().fillna(0)
     df_2 = df.tail(50)
+    # 그래프의 X축
     _x = df_2["등록일시"].tolist()
+    # 그래프의 Y축
     _y = df_2["일일사망자"].tolist()
+    # 표로 표시할 데이터
     data = df_2.to_dict()
     cnt = len(df_2)
     columns = df_2.columns  # 데이터형 list
