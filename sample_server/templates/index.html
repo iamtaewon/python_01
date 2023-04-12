@@ -89,6 +89,7 @@
               data["인덱스"] -> [0, 1, 2, 3, 4, 5]
               data["인덱스"][0] = 0
              -->
+             <!-- {percent    python code   percent} -->
             {%for i in range(0, cnt, 1)%} 
               <tr>
                 {%for col in columns%}
@@ -113,14 +114,17 @@
       <!-- <script src="{{url_for('static', filename='js/dashboard.js')}}"></script> -->
       <script>
         //그래프에 들어갈 값들을 변수에 담아두는 과정
+        // labels : x축의 이름
         const labels = {{x_pos | tojson}};
       
         const data = {
           labels: labels,
           datasets: [{
+            // label : 그래프의 범례
             label: '일일확진자',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
+            // data : y축의 수치
             data: {{y_pos | tojson}},
           }]
         };
