@@ -1,6 +1,7 @@
 import pymysql
 import pandas as pd
 
+# pass -> 현재 나의 sql 서버에는 password가 없어서 삭제함
 class Database:
     # 생성자 함수
     def __init__(self, _host, _user, _db, _port):
