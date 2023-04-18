@@ -1,4 +1,4 @@
-import pandas as  pd
+import pandas as pd
 import numpy as np
 from datetime import datetime
 
@@ -7,7 +7,7 @@ def first(df, col = 'Close', start = '20100101', end = '20230101'):
     # 인덱스가 Date가 아니면? Date컬럼을 인덱스로 변경
     if 'Date' in df.columns:
         df = df.set_index('Date')
-    # start, end를 시계열로 변겨
+    # start, end를 시계열로 변경
     start = datetime.strptime(start, '%Y%m%d').isoformat()
     end = datetime.strptime(end, '%Y%m%d').isoformat()
     # 결측치와 이상치를 제거
@@ -32,16 +32,18 @@ def second(df):
     # for i in _list:
     #     last_df = df.loc[df['STD-YM'] == i].tail(1)
     #     df2 = pd.concat([df2, last_df])
-    
-    # 월별 마지막 날의 데이터만 추출
+
+    # 월별 마지막날의 데이터만 추출
     df2 = df.loc[df['STD-YM'] != df.shift(-1)['STD-YM']]
     
-    # 전, 월, 전년도의 종가 파생변수 생성
+    # 전 월, 전년도의 종가 파생변수 생성
     df2['BF_1M'] = df2.shift(1)[col].fillna(0)
     df2['BF_12M'] = df2.shift(12)[col].fillna(0)
 
     return df2
 
+
+# 3번 함수
 def third(df1, df2):
     df1['trade'] = ""
     df1['return'] = 1
